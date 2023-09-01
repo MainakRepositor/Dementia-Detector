@@ -11,7 +11,7 @@ from Tabs import home, data, predict
 
 # Configure the app
 st.set_page_config(
-    page_title = 'Demenia Prediction',
+    page_title = 'Dementia Prediction',
     page_icon = 'brain',
     layout = 'wide',
     initial_sidebar_state = 'auto'
