@@ -2,6 +2,7 @@
 
 # Import necessary modules
 import streamlit as st
+import pandas as pd
 
 # Import necessary functions from web_functions
 from web_functions import predict
@@ -38,6 +39,13 @@ def app(df, X, y):
     # Create a list to store all the features
     features = [gender, age, edu, ses, mmse, cdr, etiv, nwbv, asf]
 
+    
+    st.header("The values entered by user")
+    st.cache_data()
+    df3 = pd.DataFrame(features).transpose()
+    df3.columns=["Gender","Age","Edu","SES","MMSE","CDR","eTIV","nWBV","ASF"]
+    st.dataframe(df3)
+
     # Create a button to predict
     if st.button("Predict"):
         # Get prediction and model score
@@ -47,10 +55,12 @@ def app(df, X, y):
 
         # Print the output according to the prediction
         if (prediction == 1):
-            st.error("The person has dementia")
+            st.error("The person has Mild Dementia")
+        if (prediction == 2):
+            st.error("The person had Acute Dementia")
         else:
-            st.success("The person has no dementia")
+            st.success("The person has No Dementia")
 
         # Print teh score of the model 
-        st.write("The model used is trusted by doctor and has an accuracy of ", round((score*100)), "%")
+        st.sidebar.write("The model used is trusted by doctor and has an accuracy of ", round((score*100)), "%")
         
